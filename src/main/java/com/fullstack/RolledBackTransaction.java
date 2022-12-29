@@ -13,7 +13,7 @@ public class RolledBackTransaction extends JDBCConnector {
         super();
         connector(URL);
     }
-    public void increasedPriceByPercentage(String coffeeName, float pricePercentage) throws SQLException {
+    public void increasedPriceByPercentage(String coffeeName, double pricePercentage) throws SQLException {
         String priceQuery = "SELECT cof_name, price FROM coffees" +
                 "WHERE cof_name = ?";
         String updateQuery = "UPDATE coffees SET price = ? cof_name = ?";
