@@ -1,9 +1,6 @@
 package com.fullstack;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CoffeeSales extends JDBCConnector {
     private static final String URL = "jdbc:postgresql://localhost:5432/test?user=postgres&password=661452";
@@ -14,6 +11,7 @@ public class CoffeeSales extends JDBCConnector {
     }
 
     public void coffeesTable() {
+
         String itExists = "SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'coffees'" +
                 "LIMIT 1";
         String createTable = "IF TACREATE TABLE coffees(cof_name VARCHAR(30) NOT NULL, sales BIGINT NOT NULL, " +
