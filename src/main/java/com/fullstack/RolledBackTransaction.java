@@ -14,8 +14,7 @@ public class RolledBackTransaction extends JDBCConnector {
         connector(URL);
     }
     public void increasedPriceByPercentage(String coffeeName, double pricePercentage) throws SQLException {
-        String priceQuery = "SELECT cof_name, price FROM coffees" +
-                "WHERE cof_name = ?";
+        String priceQuery = "SELECT cof_name, price FROM coffees WHERE cof_name = ?";
         String updateQuery = "UPDATE coffees SET price = ? cof_name = ?";
 
         getCon().setAutoCommit(false);
@@ -45,7 +44,7 @@ public class RolledBackTransaction extends JDBCConnector {
                 if (newPrice > MAXPRICE) {
                     System.out.printf("The new price, $%.2f, is greater " +
                                     "than the maximum price, $%.2f. " +
-                                    "Rolling back the transaction...%n",
+                                    "\nRolling back the transaction...%n",
                             newPrice, MAXPRICE);
                     getCon().rollback(save1);
                 }
@@ -54,6 +53,8 @@ public class RolledBackTransaction extends JDBCConnector {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            getCon().setAutoCommit(true);
         }
     }
 }
